@@ -46,3 +46,20 @@ void PushFront( LISTE * l, void * data, size_t size ){
     l->head = cell;
   }
 }
+
+void PopFront( LISTE * l ){
+  if( !Empty( l ) ){
+    struct cellule_s * cell;
+    cell = l->head;
+    if( l->tail != cell ){ (cell->next)->prev = NULL; }
+    l->head = cell->next;
+    free( cell );
+  }
+}
+
+void FreeListe( LISTE * l ){
+  while( !Empty( l ) ){
+    PopFront( l );
+  }
+  free( l );
+}
